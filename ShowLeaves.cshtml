@@ -1,0 +1,78 @@
+﻿@model IEnumerable<MVC_EF6_Employee.Models.EmployeeLeavesModel>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ShowLeaves</title>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Styles.Render("~/Content/css")
+</head>
+<body>
+    <div align="center">
+        @using (Html.BeginForm("ShowLeaves", "Leaves", FormMethod.Post, new { @class = "container", @style = "text-align:left;width:30%;" }))
+        {
+            <div class="form-group">
+                <label class="form-control-static">Show Leaves Key :</label>
+                <input type="text" id="key" name="key" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Search" class="btn-danger" />
+            </div>
+        }
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.EmployeeID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LeaveType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LeaveApplyDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LeaveStartDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NoOfDays)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EmployeeID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LeaveType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LeaveApplyDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LeaveStartDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NoOfDays)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Add Leaves", "AddLeaves", "Leaves", new { id = item.LeavesID }, null)
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</body>
+</html>

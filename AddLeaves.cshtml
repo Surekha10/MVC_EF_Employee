@@ -1,0 +1,83 @@
+﻿@model MVC_EF6_Employee.Models.EmployeeLeavesModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AddLeaves</title>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Styles.Render("~/Content/css")
+</head>
+<body>
+    <div align="center">
+        @using (Html.BeginForm("AddLeaves", "Leaves", FormMethod.Post, new { @class = "container", @style = "text-align:left;width:50%;", @enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <h4>EmployeeLeavesModel</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.EmployeeID, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.EmployeeID, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.EmployeeID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LeaveType, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <label class="form-control-static">Sick : @Html.RadioButtonFor(model => model.LeaveType, "Sick")</label>
+                        <label class="form-control-static">Casual : @Html.RadioButtonFor(model => model.LeaveType, "Casual")</label>
+                        <label class="form-control-static">Vacation : @Html.RadioButtonFor(model => model.LeaveType, "Vacation")</label>
+                        @Html.ValidationMessageFor(model => model.LeaveType, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LeaveApplyDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.LeaveApplyDate, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.LeaveApplyDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LeaveStartDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.LeaveStartDate, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.LeaveStartDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.NoOfDays, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.NoOfDays, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.NoOfDays, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="AddLeaves" class="btn btn-default" />
+                        @Html.ActionLink("Show Leaves", "ShowLeaves", "Leaves")
+                        <br />
+                        <label class="text-success">@ViewBag.msg</label>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</body>
+</html>
